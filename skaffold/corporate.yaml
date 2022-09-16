@@ -19,6 +19,6 @@ deploy:
   kubectl:
     manifests:
     - k8s-shared-environment.yaml
-    - ../services/vacations-service/k8s-corporate.yaml
+    - ../services/vacations-service/k8s.yaml
 #    - ../web/corporate-portal/k8s.yaml
   statusCheckDeadlineSeconds: 480
