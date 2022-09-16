@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vacations-service
+  labels:
+    app: vacations-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vacations-service
+  template:
+    metadata:
+      labels:
+        app: vacations-service
+    spec:
+      containers:
+        - name: vacations-service
+          image: vacations-service
+          resources:
+            requests:
+              memory: "500M"
+              cpu: "250m"
+            limits:
+              memory: "1G"
+              cpu: "1000m"
+          envFrom:
+            - configMapRef:
+                name: shared-environment
+            - secretRef:
+                name: shared-environment
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /api/vacations-service/monitor
+              port: 8080
+              httpHeaders:
+                - name: content-type
+                  value: "text/plain"
+            initialDelaySeconds: 60
+            failureThreshold: 2
+            periodSeconds: 60
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vacations-service
+  labels:
+    name: vacations-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: vacations-service
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vacations-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /api/vacations-service/$1
+    haproxy.router.openshift.io/timeout: "90s"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/vacations-service/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: vacations-service
+                port:
+                  number: 80

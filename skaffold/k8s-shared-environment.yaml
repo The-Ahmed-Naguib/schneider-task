@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shared-environment
+  namespace: default
+data:
+  SPRING_DATASOURCE_PASSWORD: password
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: shared-environment
+type: Opaque
+stringData:
+  SPRING_DATASOURCE_PASSWORD: password

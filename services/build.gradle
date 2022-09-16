@@ -1,0 +1,8 @@
+plugins {
+    id("com.autonomousapps.dependency-analysis") version "0.70.0"
+    id("com.google.cloud.tools.jib") version "3.2.1" apply false
+}
+
+subprojects {
+    version = "1.0"
+}

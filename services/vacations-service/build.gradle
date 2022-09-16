@@ -1,0 +1,59 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+	id("maven-publish")
+	id("com.google.cloud.tools.jib")
+}
+
+group = 'com.schneider.services'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+ext {
+	set('springCloudVersion', "2021.0.4")
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+
+
+jib {
+
+	to {
+		image = "authentication${rootProject.name}$version"
+	}
+	container {
+		jvmFlags =[
+				"-Djavax.net.ssl.trustStore=/etc/bm-bundle.jks",
+				"-Djavax.net.ssl.trustStorePassword=changeit",
+				"-Duser.timezone=Africa/Cairo",
+				"-server",
+				"-Xms128m",
+				"-Xmx1g"
+		]
+		creationTime = "USE_CURRENT_TIMESTAMP"
+		format = com.google.cloud.tools.jib.api.buildplan.ImageFormat.OCI
+	}
+}
+
