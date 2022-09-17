@@ -23,7 +23,14 @@ public class Vacation {
     @Column(name = "vacation_end_date", nullable = false)
     private Date  vacationEndDate;
 
+    @Column(name = "number_of_days", nullable = false)
+    private int  numberOfDays;
+
     @JoinColumn(name = "employee_id")
     @ManyToOne
     private Employee employee;
+
+    @JoinColumn(name = "vacation_type_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private VacationType vacationType;
 }
