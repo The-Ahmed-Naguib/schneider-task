@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vacation-portal
+  labels:
+    app: vacation-portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vacation-portal
+  template:
+    metadata:
+      labels:
+        app: vacation-portal
+    spec:
+      containers:
+        - name: vacation-portal
+          image: vacation-portal
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: fe-cm
+              mountPath: /app/vacation-portal/assets/configurations/
+      volumes:
+        - name: fe-cm
+          configMap:
+            name: fe-cm
+            items:
+              - key: config.json
+                path: config.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vacation-portal
+spec:
+  selector:
+    app: vacation-portal
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vacation-portal
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /vacation-portal/$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/vacation-portal/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: vacations-service
+                port:
+                  number: 80

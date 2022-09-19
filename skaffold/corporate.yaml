@@ -6,13 +6,13 @@ build:
     context: ../services/vacations-service
     jib:
       project: vacations-service
-#  - image: vacations-portal
-#    context: ../web/vacations-portal
-#    sync:
-#      infer:
-#      - src/**
-#    docker:
-#      dockerfile: dev.Dockerfile
+  - image: vacation-portal
+    context: ../web/vacation-portal
+    sync:
+      infer:
+      - src/**
+    docker:
+      dockerfile: dev.Dockerfile
   local:
     push: false
 deploy:
@@ -20,5 +20,5 @@ deploy:
     manifests:
     - k8s-shared-environment.yaml
     - ../services/vacations-service/k8s.yaml
-#    - ../web/corporate-portal/k8s.yaml
+    - ../web/vacation-portal/k8s.yaml
   statusCheckDeadlineSeconds: 480
