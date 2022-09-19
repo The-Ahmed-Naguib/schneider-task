@@ -19,7 +19,7 @@ public class VacationAdapter {
                         Util.getDateAsString( vacation.getVacationStartDate(),DATE_FORMAT_DATE_ONLY),
                         Util.getDateAsString( vacation.getVacationEndDate(),DATE_FORMAT_DATE_ONLY),
                         vacation.getNumberOfDays(),
-                        vacation.getVacationType()
+                        vacation.getVacationTypeEntity()
                 ) : null;
     }
 

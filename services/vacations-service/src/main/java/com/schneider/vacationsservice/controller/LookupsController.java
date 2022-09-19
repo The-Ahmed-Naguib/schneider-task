@@ -1,7 +1,7 @@
 package com.schneider.vacationsservice.controller;
 
 import com.schneider.vacationsservice.dto.Response;
-import com.schneider.vacationsservice.entity.VacationType;
+import com.schneider.vacationsservice.entity.VacationTypeEntity;
 import com.schneider.vacationsservice.service.LookupsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class LookupsController {
     }
 
     @GetMapping("vacation-type")
-    ResponseEntity<Response<List<VacationType>>> get() {
+    ResponseEntity<Response<List<VacationTypeEntity>>> get() {
         return ResponseEntity.ok(new Response(lookupsService.getVacationTypes()));
     }
 }

@@ -1,9 +1,9 @@
 package com.schneider.vacationsservice.entity;
 
+import com.schneider.vacationsservice.enums.VacationType;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -11,11 +11,9 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Entity(name = "vacation_type")
-public class VacationType {
-
+public class VacationTypeEntity {
     @Id
-    private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private VacationType type;
 }

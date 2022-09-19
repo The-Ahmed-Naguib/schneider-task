@@ -1,6 +1,6 @@
 package com.schneider.vacationsservice.service.impl;
 
-import com.schneider.vacationsservice.entity.VacationType;
+import com.schneider.vacationsservice.entity.VacationTypeEntity;
 import com.schneider.vacationsservice.reposatory.VacationTypeRepository;
 import com.schneider.vacationsservice.service.LookupsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class LookupServiceImpl implements LookupsService {
 
 
     @Override
-    public List<VacationType> getVacationTypes() {
-        return (List<VacationType>) vacationTypeRepository.findAll();
+    public List<VacationTypeEntity> getVacationTypes() {
+        return (List<VacationTypeEntity>) vacationTypeRepository.findAll();
     }
 }

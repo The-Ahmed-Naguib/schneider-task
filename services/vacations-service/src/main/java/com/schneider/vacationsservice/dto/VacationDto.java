@@ -1,6 +1,6 @@
 package com.schneider.vacationsservice.dto;
 
-import com.schneider.vacationsservice.entity.VacationType;
+import com.schneider.vacationsservice.entity.VacationTypeEntity;
 import lombok.*;
 
 import java.io.Serializable;
@@ -16,5 +16,5 @@ public class VacationDto implements Serializable {
     private String vacationStartDate;
     private String vacationEndDate;
     private int numberOfDays;
-    private VacationType vacationType;
+    private VacationTypeEntity vacationTypeEntity;
 }

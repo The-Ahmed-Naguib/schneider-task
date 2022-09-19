@@ -9,5 +9,5 @@ public interface VacationService {
 
     List<VacationDto> getAllVacationsByEmployeeId(long employeeId);
     VacationDto addVacation(VacationSubmitDto dto);
-    Integer calculateVacationDuration(String startDate, String endDate);
+    int calculateVacationDuration(String startDate, String endDate);
 }

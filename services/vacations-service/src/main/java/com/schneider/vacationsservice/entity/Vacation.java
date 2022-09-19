@@ -32,5 +32,5 @@ public class Vacation {
 
     @JoinColumn(name = "vacation_type_id")
     @ManyToOne(fetch = FetchType.EAGER)
-    private VacationType vacationType;
+    private VacationTypeEntity vacationTypeEntity;
 }

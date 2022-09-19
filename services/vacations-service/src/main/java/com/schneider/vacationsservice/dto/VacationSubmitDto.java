@@ -1,5 +1,6 @@
 package com.schneider.vacationsservice.dto;
 
+import com.schneider.vacationsservice.enums.VacationType;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,5 +14,5 @@ import java.io.Serializable;
 public class VacationSubmitDto implements Serializable {
     private String vacationStartDate;
     private String vacationEndDate;
-    private long vacationTypeId;
+    private VacationType vacationType;
 }
