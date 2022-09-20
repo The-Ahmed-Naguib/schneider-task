@@ -53,8 +53,8 @@ This project is a simple HR tool for handling both sick and annual leaves of the
 # Web View:
 
 ![Alt text](webViewScreenShoots/1.png?raw=true "1")
-![Alt text](webViewScreenShoots/1.png?raw=true "2")
-![Alt text](webViewScreenShoots/1.png?raw=true "3")
+![Alt text](webViewScreenShoots/2.png?raw=true "2")
+![Alt text](webViewScreenShoots/3.png?raw=true "3")
 
 
 # Putting Project on rails:
