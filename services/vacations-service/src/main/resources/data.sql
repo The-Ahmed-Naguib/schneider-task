@@ -48,4 +48,20 @@ CREATE TABLE weekends_holidays
 
 
 insert into weekends_holidays(day_date)
-values (CURRENT_DATE() + 1);
+values ('2022-09-23');
+
+
+insert into weekends_holidays(day_date)
+values ('2022-09-24');
+
+insert into weekends_holidays(day_date)
+values ('2022-09-30');
+
+insert into weekends_holidays(day_date)
+values ('2022-10-01');
+
+insert into weekends_holidays(day_date)
+values ('2022-10-07');
+
+insert into weekends_holidays(day_date)
+values ('2022-10-08');

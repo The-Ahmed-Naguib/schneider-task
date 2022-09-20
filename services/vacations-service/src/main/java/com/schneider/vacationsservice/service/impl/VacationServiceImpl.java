@@ -60,6 +60,7 @@ public class VacationServiceImpl implements VacationService {
         int numberOfOffDays = calculateVacationDuration(submitDto.getVacationStartDate(), submitDto.getVacationEndDate());
         validateStartAndDate(vacationStartDate, vacationEndDate);
         validateNumberOfOffDaysWithEmployee(numberOfOffDays, employee, vacationTypeEntity);
+        validateNoIntersections(vacationStartDate,vacationEndDate);
         Vacation vacation = new Vacation();
         vacation.setVacationTypeEntity(vacationTypeEntity);
         vacation.setEmployee(employee);
@@ -91,6 +92,11 @@ public class VacationServiceImpl implements VacationService {
         if ((vacationTypeEntity.getType() == SICK && numberOfOffDays > employee.getSickVacationBalance())
                 || (vacationTypeEntity.getType() == ANNUAL && numberOfOffDays > employee.getAnnualVacationBalance())
         ) throw new VacationsServiceException("vacations-service-412", "No sufficient balance");
+    }
+
+    protected void validateNoIntersections(Date dateFrom, Date dateTo) {
+        int intersections = vacationRepository.numberOfIntersections(dateFrom,  dateTo);
+        if (intersections > 0) throw new VacationsServiceException("vacations-service-413", "Someday are already submitted");
     }
 
     @Transactional
